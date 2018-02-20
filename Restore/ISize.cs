@@ -10,6 +10,10 @@ namespace Restore
     {
         Int64 Size();
     }
+    interface ICount
+    {
+        Int64 Count();
+    }
     interface IAddSize
     {
         void AddSize(Int64 size);

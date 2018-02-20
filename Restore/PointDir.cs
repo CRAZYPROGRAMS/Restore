@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Restore
 {
-    class PointDir:IDirItem, ISize, IAddSize, IAddChild
+    class PointDir:IDirItem, ISize, IAddSize, IAddChild, ICount
     {
         private PointTree tree;
         private Dictionary<string, IDirItem> childs = new Dictionary<string, IDirItem>();
         private string path;
         private string name;
         private Int64 size;
+        private Int64 count;
         private IDirItem parent;
         public bool IsDir() { return true; }
         public IDirItem Parent() { return this.parent; }
@@ -22,22 +23,24 @@ namespace Restore
         {
             this.path = path;
             this.tree = tree;
-            name = System.IO.Path.GetFileName(path);
+            this.name = System.IO.Path.GetFileName(path);
             var dir = System.IO.Path.GetDirectoryName(path);
             if (dir != "")
             {
                 var pdir = tree.getDir(dir);
-                pdir.AddChild(name, this);
+                pdir.AddChild(this.name, this);
                 parent = pdir;
             }
             else
             {
                 parent = tree;
-                tree.AddChild(name, this);
+                tree.AddChild(this.name, this);
             }
             
         }
+        public Int64 Count() { return this.count; }
         public void AddSize(Int64 size) {
+            this.count++;
             this.size += size;
             var pdir = this.parent as PointDir;
             if (pdir != null)

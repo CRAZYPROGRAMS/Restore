@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Restore
 {
-    class PointFile: IDirItem, ISize
+    class PointFile: IDirItem, ISize, ICount
     {
         private PointTree tree;
         private string path;
@@ -17,9 +17,11 @@ namespace Restore
         public bool IsDir() { return false; }
         public IDirItem Parent() { return this.parent; }
         public string Name() { return this.name; }
-        public string Path() { return this.parent == null ? this.name : this.parent.Path() + "/" + this.name; }
+        public string Path() { return this.tree.Path() + "/" + this.path; }
         public PointFile(string path, string hash, Int64 size, PointTree tree)
         {
+            this.tree = tree;
+            this.path = path;
             this.size = size;
             var dir = System.IO.Path.GetDirectoryName(path);
             name = System.IO.Path.GetFileName(path);
@@ -33,6 +35,7 @@ namespace Restore
                 ((IAddChild)parent).AddChild(name, this);
 
         }
+        public Int64 Count() { return 1; }
         public Int64 Size() { return size; }
         public IEnumerable<IDirItem> Childs()
         {
@@ -40,3 +43,4 @@ namespace Restore
         }
     }
 }
+

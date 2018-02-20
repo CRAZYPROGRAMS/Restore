@@ -1,3 +1,5 @@
 Restore/obj/
 Restore/bin/
 .vs/
+packages/
+*.csproj.user

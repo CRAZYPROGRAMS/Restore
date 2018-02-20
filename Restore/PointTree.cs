@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Restore
 {
-    class PointTree : IDirItem, ISize, IAddSize, IAddChild
+    class PointTree : IDirItem, ISize, IAddSize, IAddChild, ICount
     {
         private Dictionary<string, IDirItem> childs = new Dictionary<string, IDirItem>();
         private string path;
         private string name;
+        private Int64 count;
         private Int64 size;
         private Dictionary<string, IDirItem> files = new Dictionary<string, IDirItem>();
         private IDirItem parent;
@@ -66,9 +67,11 @@ namespace Restore
                 loadFile();
             return childs.Values;
         }
+        public Int64 Count() { return this.count; }
         public Int64 Size() { return size; }
         public void AddSize(Int64 size)
         {
+            this.count++;
             this.size += size;
         }
     }
