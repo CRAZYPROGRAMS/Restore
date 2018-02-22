@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Restore
 {
-    class PointTree : IDirItem, ISize, IAddSize, IAddChild, ICount
-    {
+    class PointTree : IDirItem, ISize, IAddSize, IAddChild, ICount {
         private Dictionary<string, IDirItem> childs = new Dictionary<string, IDirItem>();
         private string path;
         private string name;
@@ -24,19 +23,14 @@ namespace Restore
         private void loadFile() {
             bool FirstLine = true;
             var poles = new Dictionary<string, int>();
-            using (StreamReader sr = new StreamReader(path))
-            {
-                while (sr.Peek() >= 0)
-                {
+            using (StreamReader sr = new StreamReader(path)) {
+                while (sr.Peek() >= 0) {
                     string[] FileLine = sr.ReadLine().Split('\t');
-                    if (FirstLine)
-                    {
+                    if (FirstLine) {
                         FirstLine = false;
                         for (var i = 0; i < FileLine.Length; i++)
                             poles.Add(FileLine[i].ToLower(), i);
-                    }
-                    else
-                    {
+                    } else {
                         string file_path = FileLine[poles["path"]];
                         string file_hash = FileLine[poles["hash"]].ToLower();
                         Int64 file_size = 0;
@@ -57,20 +51,17 @@ namespace Restore
                 files[path] = new PointDir(path, this);
             return files[path] as PointDir;
         }
-        public void AddChild(string name, IDirItem item)
-        {
+        public void AddChild(string name, IDirItem item) {
             childs[name] = item;
         }
-        public IEnumerable<IDirItem> Childs()
-        {
+        public IEnumerable<IDirItem> Childs() {
             if (!this.load)
                 loadFile();
             return childs.Values;
         }
         public Int64 Count() { return this.count; }
         public Int64 Size() { return size; }
-        public void AddSize(Int64 size)
-        {
+        public void AddSize(Int64 size) {
             this.count++;
             this.size += size;
         }

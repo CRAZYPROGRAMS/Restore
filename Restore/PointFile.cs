@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Restore
 {
-    class PointFile: IDirItem, ISize, ICount
-    {
+    class PointFile: IDirItem, ISize, ICount {
         private PointTree tree;
         private string path;
         private string name;
+        public string hash { get; private set; }
         private Int64 size;
         private IDirItem parent;
         
@@ -18,8 +18,8 @@ namespace Restore
         public IDirItem Parent() { return this.parent; }
         public string Name() { return this.name; }
         public string Path() { return this.tree.Path() + "/" + this.path; }
-        public PointFile(string path, string hash, Int64 size, PointTree tree)
-        {
+        public PointFile(string path, string hash, Int64 size, PointTree tree) {
+            this.hash = hash;
             this.tree = tree;
             this.path = path;
             this.size = size;
@@ -37,10 +37,10 @@ namespace Restore
         }
         public Int64 Count() { return 1; }
         public Int64 Size() { return size; }
-        public IEnumerable<IDirItem> Childs()
-        {
+        public IEnumerable<IDirItem> Childs() {
             throw new NotImplementedException();
         }
     }
 }
+
 

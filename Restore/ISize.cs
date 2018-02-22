@@ -4,18 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restore
-{
-    interface ISize
-    {
+namespace Restore { 
+    interface ISize {
         Int64 Size();
     }
-    interface ICount
-    {
+    interface ICount {
         Int64 Count();
     }
-    interface IAddSize
-    {
+    interface IAddSize {
         void AddSize(Int64 size);
     }
 }

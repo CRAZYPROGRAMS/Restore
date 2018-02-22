@@ -33,18 +33,20 @@
             this.ColumnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.СolumnSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnCount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusTypeObject = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusSize = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusProgress = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFileRestore = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.ColumnCount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.statusCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusName = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -77,6 +79,8 @@
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // ColumnName
             // 
@@ -93,6 +97,11 @@
             this.ColumnType.DisplayIndex = 1;
             this.ColumnType.Text = "Тип";
             this.ColumnType.Width = 56;
+            // 
+            // ColumnCount
+            // 
+            this.ColumnCount.Text = "Количество";
+            this.ColumnCount.Width = 73;
             // 
             // splitContainer1
             // 
@@ -118,7 +127,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusTypeObject,
             this.statusSize,
-            this.statusCount});
+            this.statusCount,
+            this.statusProgress,
+            this.statusName});
             this.statusStrip1.Location = new System.Drawing.Point(0, 504);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(803, 22);
@@ -136,6 +147,18 @@
             this.statusSize.Name = "statusSize";
             this.statusSize.Size = new System.Drawing.Size(12, 17);
             this.statusSize.Text = "*";
+            // 
+            // statusCount
+            // 
+            this.statusCount.Name = "statusCount";
+            this.statusCount.Size = new System.Drawing.Size(12, 17);
+            this.statusCount.Text = "*";
+            // 
+            // statusProgress
+            // 
+            this.statusProgress.Name = "statusProgress";
+            this.statusProgress.Size = new System.Drawing.Size(400, 16);
+            this.statusProgress.Visible = false;
             // 
             // menuStrip1
             // 
@@ -160,19 +183,19 @@
             // menuFileRestore
             // 
             this.menuFileRestore.Name = "menuFileRestore";
-            this.menuFileRestore.Size = new System.Drawing.Size(152, 22);
+            this.menuFileRestore.Size = new System.Drawing.Size(113, 22);
             this.menuFileRestore.Text = "Restore";
             this.menuFileRestore.Click += new System.EventHandler(this.menuFileRestore_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(110, 6);
             // 
             // menuFileExit
             // 
             this.menuFileExit.Name = "menuFileExit";
-            this.menuFileExit.Size = new System.Drawing.Size(152, 22);
+            this.menuFileExit.Size = new System.Drawing.Size(113, 22);
             this.menuFileExit.Text = "Exit";
             this.menuFileExit.Click += new System.EventHandler(this.menuFileExit_Click);
             // 
@@ -184,16 +207,11 @@
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // ColumnCount
+            // statusName
             // 
-            this.ColumnCount.Text = "Количество";
-            this.ColumnCount.Width = 73;
-            // 
-            // statusCount
-            // 
-            this.statusCount.Name = "statusCount";
-            this.statusCount.Size = new System.Drawing.Size(12, 17);
-            this.statusCount.Text = "*";
+            this.statusName.Name = "statusName";
+            this.statusName.Size = new System.Drawing.Size(12, 17);
+            this.statusName.Text = "*";
             // 
             // Viewer
             // 
@@ -206,7 +224,7 @@
             this.Controls.Add(this.splitContainer1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Viewer";
-            this.Text = "Form1";
+            this.Text = "Storage";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -240,6 +258,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ColumnHeader ColumnCount;
         private System.Windows.Forms.ToolStripStatusLabel statusCount;
+        private System.Windows.Forms.ToolStripProgressBar statusProgress;
+        private System.Windows.Forms.ToolStripStatusLabel statusName;
     }
 }
 

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Restore
 {
-    class FSDirectory: IDirItem
-    {
+    class FSDirectory: IDirItem {
         private Dictionary<string, IDirItem> cachePoint = new Dictionary<string, IDirItem>();
         private string path;
         private string name;
@@ -34,8 +33,7 @@ namespace Restore
                 newCachePoint[subDir] = item;
             }
             foreach (string subDir in Directory.EnumerateFiles(path))
-                if (System.IO.Path.GetExtension(subDir).ToLower()!=".log")
-                {
+                if (System.IO.Path.GetExtension(subDir).ToLower()!=".log") {
                     IDirItem item;
                     if (cachePoint.ContainsKey(subDir))
                         item = cachePoint[subDir];
